@@ -17,7 +17,7 @@
     <color name="blackTrans">#80000000</color>
     <color name="MyFavCol">#00c853</color>
     <color name="orange">#d6d61d</color>
-    <color name="light_light_black">#93060606</color>
+    <color name="light_light_black">#44060606</color>
 
     <color name="scanner_line">#00ceff</color>
 </resources>

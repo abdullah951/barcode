@@ -55,7 +55,7 @@ public class BarcodeReader extends Fragment implements View.OnTouchListener, Bar
 
     // intent request code to handle updating play services if needed.
     private static final int RC_HANDLE_GMS = 9001;
-    private static final int RC_HANDLE_CAMERA_PERM = 123456;
+    private static final int RC_HANDLE_CAMERA_PERM = 1234;
 
     Activity context;
 
@@ -254,23 +254,29 @@ public class BarcodeReader extends Fragment implements View.OnTouchListener, Bar
         return false;
     }
 
-    private static Camera getCamera(@NonNull CameraSource cameraSource) {
+    private Camera getCamera(@NonNull CameraSource cameraSource) {
         Field[] declaredFields = CameraSource.class.getDeclaredFields();
+        if(cameraSource !=null) {
+            for (Field field : declaredFields) {
+                if (field.getType() == Camera.class) {
+                    field.setAccessible(true);
+                    try {
 
-        for (Field field : declaredFields) {
-            if (field.getType() == Camera.class) {
-                field.setAccessible(true);
-                try {
-                    Camera camera = (Camera) field.get(cameraSource);
-                    if (camera != null) {
-                        return camera;
+                        Camera camera = (Camera) field.get(cameraSource);
+
+                        if (camera != null) {
+                            return camera;
+                        }
+                        return null;
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
                     }
-                    return null;
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
+                    break;
                 }
-                break;
             }
+        }else {
+            Log.e(TAG, "Please accept the camera permission");
+            Toast.makeText(context, "Please accept the camera permission", Toast.LENGTH_LONG).show();
         }
         return null;
     }

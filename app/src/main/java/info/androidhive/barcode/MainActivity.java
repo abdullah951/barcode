@@ -37,9 +37,11 @@ public class MainActivity extends AppCompatActivity implements BarcodeReader.Bar
             public void onClick(View view) {
                 if(barcodeReader.getActivity() !=  null) {
                     if(barcodeReader.isCameraStarted()){
-                        flashoff.setVisibility(View.VISIBLE);
-                        flashon.setVisibility(View.GONE);
-                        barcodeReader.flashOnButton(true);
+                        flashoff.setVisibility(View.GONE);
+                        flashon.setVisibility(View.VISIBLE);
+                        Log.e(TAG, "flashoff");
+                        barcodeReader.flashOnButton(false);
+                        Log.e(TAG, "flashoff");
                     }
                 }
             }
@@ -50,10 +52,11 @@ public class MainActivity extends AppCompatActivity implements BarcodeReader.Bar
             public void onClick(View view) {
                 if(barcodeReader.getActivity() !=  null) {
                     if(barcodeReader.isCameraStarted()){
-                        flashoff.setVisibility(View.GONE);
-                        flashon.setVisibility(View.VISIBLE);
-
-                        barcodeReader.flashOnButton(false);
+                        flashoff.setVisibility(View.VISIBLE);
+                        flashon.setVisibility(View.GONE);
+                        Log.e(TAG, "flashon");
+                        barcodeReader.flashOnButton(true);
+                        Log.e(TAG, "flashon");
                     }
                 }
             }
